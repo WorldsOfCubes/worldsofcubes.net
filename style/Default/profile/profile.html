@@ -1,0 +1,71 @@
+<div style="margin-top:10px;"></div>
+<?php echo $message ?>
+<div class="form-block">
+
+	<div class="block-header">Настройки аккаунта</div>
+	<div class="block-line"></div>
+
+	<div class="navbar navbar-inverse" role="navigation">
+		<div class="navbar-header">
+
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".profile-menus">
+				<span class="sr-only">{MENU_SHOW_ALL}</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<div class="navbar-brand"><?php echo $player; ?></div>
+			<ul class="collapse navbar-collapse profile-menus nav navbar-nav">
+				<li class="active"><a href="#tab1" data-toggle="tab">Информация</a></li>
+				<li><a href="#tab2" data-toggle="tab">Настройки</a></li>
+				<li><a href="#tab3" data-toggle="tab">Доверенные проекты</a></li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="tabbable" style="display: inline-block;">
+		<div class="tab-content">
+
+			<div class="tab-pane active" id="tab1" style="margin-top: 6px;">
+
+				<?php echo $profile_info ?>
+
+			</div>
+
+			<div class="tab-pane" id="tab2">
+
+				<form id="profile-update" autocomplete="off" action="action.php" method="post"
+				      enctype="multipart/form-data" class="form-horizontal" role="form">
+
+					<input type="hidden" name="method" value="profile" />
+
+					<?php echo $profile_inputs ?>
+
+					<div class="form-group">
+						<div class="col-lg-offset-2 col-lg-10">
+							<input id="profile-button" class="btn btn-default" type="submit"
+							       onclick="UpdateProfile(); return false" value="Изменить" />
+						</div>
+					</div>
+
+				</form>
+				<?php echo $profile_prefix ?>
+
+			</div>
+
+			<div class="tab-pane" id="tab3" style="margin-top: 6px;">
+				Здесь можно увидеть список проектов, при входе на которые у Вас отключено подтверждение. Здесь же можно отключить вход без подтверждения для одного или всех проектов.
+				<p><b>ВНИМАНИЕ!</b> Если какому-то проекту Вы не доверяете, то отключите вход без предупреждения!</p>
+				<table class="table table-hover">
+					<tr><th>Название проекта</th><th style="text-align: right">Доверяете?</th></tr>
+					<tbody id="trusted-projects">
+						<?=$profile_trusted_projects?>
+					</tbody>
+				</table>
+				<button class="btn btn-danger btn-block" onclick="RemoveAllTrust();"><i class="glyphicon glyphicon-remove"></i> Не доверяю больше никому</button>
+			</div>
+
+		</div>
+	</div>
+
+</div>
